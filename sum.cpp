@@ -7,26 +7,21 @@ You may assume that each input would have exactly one solution, and you may not 
 You can return the answer in any order.
 
 
-*/class Solution {
+*/
+class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        //Key is the number and value is its index in the vector.
-	unordered_map<int, int> hash;
-	vector<int> result;
-	for (int i = 0; i < numbers.size(); i++) {
-		int numberToFind = target - numbers[i];
+        unordered_map<int, int> numMap;
+        int n = nums.size();
 
-            //if numberToFind is found in map, return them
-		if (hash.find(numberToFind) != hash.end()) {
-                    //+1 because indices are NOT zero based
-			result.push_back(hash[numberToFind] + 1);
-			result.push_back(i + 1);			
-			return result;
-		}
+        for (int i = 0; i < n; i++) {
+            int complement = target - nums[i];
+            if (numMap.count(complement)) {
+                return {numMap[complement], i};
+            }
+            numMap[nums[i]] = i;
+        }
 
-            //number was not found. Put it in the map.
-		hash[numbers[i]] = i;
-	}
-	return result;
+        return {}; // No solution found
     }
 };
